@@ -1,0 +1,6 @@
+/composer.lock
+vendor/
+.travis/phar-private.pem
+visit.phar
+visit.phar.pubkey
+visit.phar.version
