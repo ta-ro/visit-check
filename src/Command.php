@@ -7,15 +7,10 @@ abstract class Command
     const TAB_SIZE = 8;
 
     protected $version = '1.0.0';
-    
     public $essential = false;
-
     public $display = 65535;
-
     public $name = 'CommandName';
-
     public $description = 'CLI description';
-
     public $tag = [
         'color' => '',
         'text' => ''
@@ -30,10 +25,26 @@ abstract class Command
 
     /**
      * Execute a command
+     *
+     * @param array $args
      * @return bool
      */
     abstract public function fire(array $args = []);
 
+    /**
+     * Set the program version
+     *
+     * @param string $version
+     * @return void
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
+
+    /**
+     * Get program version
+     */
     public function getVersion()
     {
         return $this->version;
@@ -41,6 +52,7 @@ abstract class Command
 
     /**
      * Return the size of the current terminal window
+     *
      * @return array (int, int)
      */
     public function getScreenSize()
@@ -51,6 +63,11 @@ abstract class Command
         ];
     }
 
+    /**
+     * Make CLI strings colorful
+     *
+     * @return array
+     */
     public function colorize()
     {
         if (preg_match('/^win/i', PHP_OS)) {
@@ -78,8 +95,10 @@ abstract class Command
 
     /**
      * Return a command
+     *
      * @param string $name
      * @param boolean $cache
+     *
      * @return Command (derived class)
      */
     public function getCommandObject($name, $cache = true)
@@ -89,9 +108,11 @@ abstract class Command
 
     /**
      * Return a command (statically callable)
+     *
      * @param string $name
      * @param boolean $cache
-     * @return \Zabbic\Phpcheck\Command
+     *
+     * @return \Visit\Check\Command
      */
     public static function getCommandStatic($name, $cache = true)
     {
@@ -107,8 +128,10 @@ abstract class Command
         
         if ($cache) {
             self::$cache[$name] = new $_name;
+
             return self::$cache[$name];
         }
+
         return new $_name;
     }
 
@@ -176,7 +199,7 @@ abstract class Command
         $TAB = str_repeat(' ', self::TAB_SIZE);
         $HTAB = str_repeat(' ', (int) ceil(self::TAB_SIZE / 2));
 
-        echo $HTAB, 'Zabbix / Phpcheck - ', $this->name, "\n\n";
+        echo $HTAB, 'Visit Check - ', $this->name, "\n\n";
         echo $TAB, $this->description, "\n\n";
         
         return true;
