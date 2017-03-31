@@ -1,0 +1,25 @@
+{
+    "name": "ta-ro/visit-check",
+    "description": "A collection of Zabbix-Checks usable through PHP-Loadable-Module.",
+    "license": "BSD-3-Clause",
+    "type": "project",
+    "keywords": [
+        "zabbix",
+        "php-loadable-module"
+        "checks"
+    ],
+    "authors": [
+        {
+            "name": "Tammo Rohlfs",
+            "email": "tammo.rohlfs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Visit\\Check\\": "src/"
+        }
+    }
+}
